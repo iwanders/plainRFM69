@@ -79,6 +79,7 @@ void bareRFM69::writeFIFO(void* buffer, uint8_t len){
     this->chipSelect(true); // assert chip select
     SPI.transfer(RFM69_WRITE_REG_MASK | (RFM69_FIFO & RFM69_READ_REG_MASK)); 
     for (uint8_t i=0; i < len ; i++){
+        // Serial.print("Writing to FIFO: "); Serial.println(r[i]);
         SPI.transfer(r[i]);
     }
     this->chipSelect(false);// deassert chip select
@@ -107,8 +108,12 @@ uint8_t bareRFM69::readVariableFIFO(void* buffer, uint8_t max_length){
     SPI.transfer((RFM69_FIFO % RFM69_READ_REG_MASK));
     uint8_t len = SPI.transfer(0);
     r[0] = len;
-    for (uint8_t i=0; i < (max_length-1); i++){
+    // Serial.print("readVariableFIFO, len:"); Serial.println(len);
+    len = len > (max_length-1) ? (max_length-1) : len;
+    // Serial.print("readVariableFIFO, len:"); Serial.println(len);
+    for (uint8_t i=0; i < len; i++){
         r[i+1] = SPI.transfer(0);
+        // Serial.print("readVariableFIFO, r[i+1]"); Serial.println(r[i+1]);
     }
     this->chipSelect(false);// deassert chip select
     SPI.endTransaction();    // release the SPI bus
