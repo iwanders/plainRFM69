@@ -99,7 +99,7 @@ void setup(){
 
     rfm.setBufferSize(5);   // set the internal buffer size.
     rfm.setPacketLength(32); // set the packet length.
-    rfm.setFrequency(434*1000*1000); // set the frequency.
+    rfm.setFrequency((uint32_t) 434*1000*1000); // set the frequency.
 
     rfm.baud9600();
 

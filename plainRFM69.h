@@ -194,8 +194,8 @@ class plainRFM69 : public bareRFM69{
             For more precise control, use void setFrf from bareRFM69.
 
             Example:
-                setFrequency(450*1000*1000); sets to ~450 MHz (actually 450.259)
-                setFrequency(434*1000*1000); sets to ~434 MHz (actually 434.250)
+                setFrequency((uint32_t) 450*1000*1000); sets to ~450 MHz (actually 450.259)
+                setFrequency((uint32_t) 434*1000*1000); sets to ~434 MHz (actually 434.250)
         */
 
         void setAES(bool use_AES);

@@ -136,7 +136,7 @@ void setup(){
     rfm.setBufferSize(10);      // allow buffering of up to ten packets.
     rfm.setPacketLength(64);    // length of packets.
 
-    rfm.setFrequency(434*1000*1000); // set frequency to 434 MHz.
+    rfm.setFrequency((uint32_t) 434*1000*1000); // set frequency to 434 MHz.
     rfm.baud300000(); // Set the baudRate to 300000 bps
 
     // At higher packetrates it is necessary to increase this in order to ensure
