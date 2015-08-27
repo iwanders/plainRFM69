@@ -4,7 +4,7 @@
 */
 
 
-#include <WProgram.h>
+#include <Arduino.h>
 #include <bareRFM69.h>
 #include <bareRFM69_const.h>
 

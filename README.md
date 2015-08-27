@@ -142,7 +142,10 @@ methods.
 I've only tested the examples with [Teensy 3][teensy31], so I cannot comment on
 this working with other hardware. Other libraries that might interest you are
 [Radiohead][radiohead] or LowPowerLabs' [RFM69][rfm69] which have seen extensive
-testing, also on hardware other than the Teensy.
+testing, also on hardware other than the Teensy. That being said, an example has
+been added which is known to work on the Arduino UNO and Moteino, see
+issue [#1](https://github.com/iwanders/plainRFM69/issues/1) for further
+information.
 
 License
 ------

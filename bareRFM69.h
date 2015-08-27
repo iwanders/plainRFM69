@@ -5,7 +5,7 @@
 
 
 #include <SPI.h>
-#include <WProgram.h>
+#include <Arduino.h>
 
 #ifndef BARE_RFM69_H
 #define BARE_RFM69_H
