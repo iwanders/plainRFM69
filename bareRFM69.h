@@ -189,12 +189,19 @@ class bareRFM69 {
         */
 
 
-        void startRfCalibration(){this->writeRegister(RFM69_OSC1, 1<<7);}
+        void startRCCalibration(){this->writeRegister(RFM69_OSC1, 1<<7);}
         /*  Triggers the calibration of the RC oscillator when set.
             Always reads 0. RC calibration must be triggered in Standby mode.
+
+            See section 4.3.5 of the RFM69CW datasheet. The timing of the Listen
+            Mode depends on the internal low-power RC oscillator.
+
+            This oscillator is automatically calibrated but needs recalibration
+            when used over large temperature variations.            
         */
-        bool completedRfCalibration(){return this->readRegister(RFM69_OSC1) & (1<<6);}
-        /* Reads RF calibration over flag */
+
+        bool completedRCCalibration(){return this->readRegister(RFM69_OSC1) & (1<<6);}
+        /* Reads RC calibration finished flag */
         // takes about 125 usec between start and completion.
 
 
