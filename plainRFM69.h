@@ -293,6 +293,8 @@ class plainRFM69 : public bareRFM69{
         void baud9600();
         void baud153600();
         void baud300000();
+
+        void emitPreamble(); // continuously emit a preamble
 };
 
 //PLAIN_RFM69_H

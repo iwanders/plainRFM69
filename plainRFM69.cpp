@@ -331,6 +331,10 @@ void plainRFM69::baud300000(){
 }
 
 
+void plainRFM69::emitPreamble(){
+    this->setMode(RFM69_MODE_SEQUENCER_OFF | RFM69_MODE_TRANSMITTER);
+}
+
 
 
 /*
