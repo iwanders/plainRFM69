@@ -147,6 +147,9 @@ been added which is known to work on the Arduino UNO and Moteino, see
 issue [#1](https://github.com/iwanders/plainRFM69/issues/1) for further
 information.
 
+The PCB's I designed to connect the radio modules to the Teensy can be found in
+[extras/hardware/](extras/hardware/).
+
 License
 ------
 MIT License, see LICENSE.md.
