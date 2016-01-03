@@ -12,6 +12,7 @@ One wire is required from the upper to the lower board, this is the MISO line of
 Pinout for lower board
 -------------
 Related to the RFM69CW radio module:
+
 | RFM           | Teensy |
 | ------------- | ----------- |
 | MOSI          |   11 DOUT |
@@ -20,6 +21,7 @@ Related to the RFM69CW radio module:
 | DIO3          |   16 |
 
 For the NRF header:
+
 | NRF   |   Teensy |
 | ------|--------- |
 | CE    |   9 |
@@ -32,7 +34,9 @@ For the NRF header:
 
 Pinout for the upper board
 -------------------
+
 Related to the RFM69CW radio module:
+
 | RFM           | Teensy |
 | ------------- | ----------- |
 | MISO          |  Solderpad |
@@ -43,6 +47,7 @@ Related to the RFM69CW radio module:
 | DIO5          | Solderpad |
 
 Related to the charging Circuit:
+
 | MAX1555       | Connected to          |
 | ------------- | ----------- |
 | Bat           | Battery header positive, Teensy Vin |
@@ -56,8 +61,8 @@ I used the Eagle part libraries from [Mikes-Eagle-Libraries](https://github.com/
 
 Assembled
 --------
-![Top view for boards and radio module](extras/hardware/media/top.jpg?raw=true "Top view")
+![Top view for boards and radio module](media/top.jpg?raw=true "Top view")
 
-![Bottom view for boards and radio module](extras/hardware/media/bottom.jpg?raw=true "Bottom view")
+![Bottom view for boards and radio module](media/bottom.jpg?raw=true "Bottom view")
 
 [max1555]: https://www.maximintegrated.com/en/products/power/battery-management/MAX1555.html
