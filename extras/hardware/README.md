@@ -11,6 +11,7 @@ One wire is required from the upper to the lower board, this is the MISO line of
 
 Pinout for lower board
 -------------
+![Schematic for lower board](media/teensy_rfm69cw_nrf_lower.png?raw=true "Lower board schematic")
 Related to the RFM69CW radio module:
 
 | RFM           | Teensy |
@@ -34,6 +35,7 @@ For the NRF header:
 
 Pinout for the upper board
 -------------------
+![Schematic for upper board](media/teensy_rfm69_cw_nrf_upper.png?raw=true "Upper board schematic")
 
 Related to the RFM69CW radio module:
 
