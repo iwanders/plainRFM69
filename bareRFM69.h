@@ -52,7 +52,7 @@ class bareRFM69 {
         bareRFM69(uint8_t cs_pin){
             this->cs_pin = cs_pin;
             pinMode(this->cs_pin, OUTPUT);
-            pinMode(this->cs_pin, HIGH);
+            digitalWrite(this->cs_pin, HIGH);
 
             // Max 10 MHz clock, MSB first, CPOL= 0 and CPHA = 0
             // according to the datasheet.
