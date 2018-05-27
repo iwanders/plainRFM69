@@ -409,7 +409,7 @@ class bareRFM69 {
         // Receiver Registers
         //#####################################################################
 
-        void setLNA(bool LnaZin, uint8_t LnaGainSelect){
+        void setLNA(uint8_t LnaZin, uint8_t LnaGainSelect){
             this->writeRegister(RFM69_LNA, LnaZin+LnaGainSelect);};
         /*  
             LnaZin:
