@@ -82,7 +82,7 @@ All tests were performed with the radio modules located next to each other. The
 measured results are of course dependent on the parameters chosen, the
 values from the examples show below use a GFSK modulation at 300000 bps.
 
-####Maximum_Speed
+#### Maximum_Speed
 Sends 64 byte packets from the sender to the receiver. For every message sent
 a counter is incremented. This counter is repeated in the message to create the
 payload. At the receiver the payload is checked and the counter is used to check
@@ -96,7 +96,7 @@ This example can also be used to verify that the internal buffer is working. For
 example when a delay is introduced in the loop of the receiver.
 
 
-####Maximum_PingPong
+#### Maximum_PingPong
 Sends 64 byte packets from the sender to the receiver, which echoes the packet,
 the sender waits for this echo and checks the counter and message payload.
 ```
@@ -107,7 +107,7 @@ Successful / second: 188
 Average ping (uSec): 5313
 ```
 
-####Buffering
+#### Buffering
 The internal buffer of bareRFM69 is demonstrated in the BusyMan example. In this
 example the interrupt mechanism is used and the receiving end is very busy in
 the loop, this results in several messages queueing up in the internal buffer.
