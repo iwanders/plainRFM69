@@ -1,5 +1,5 @@
 plainRFM69
-=========
+==========
 
 This is a library for HopeRF's RFM69 radio series. The main goal of this library
 is to use the hardware as efficiently as possible. With this goal in mind, the
@@ -7,7 +7,7 @@ used approach is different from that of the already existing libraries for this
 radio module.
 
 Approach
--------
+--------
 The library is composed of two parts, the first; bareRFM69 provides a bare bones
 interface to the hardware. It does nothing by itself and only provides methods
 to interact with the hardware. Most of the configuration parameters are listed
@@ -26,7 +26,7 @@ radio completes transmission.
 
 
 Internal Workings
----------------
+-----------------
 The plainRFM69 class provides several methods to configure the radio module with
 its recommended parameters. The module is used in packet mode. Variable length
 and address filtering is supported. 
@@ -73,7 +73,7 @@ complete.
 
 
 Testing & Performance
--------------------
+---------------------
 The library was developed and tested on two [Teensy 3.1][teensy31]'s with
 RFM69CW's attached. The pins used are described in the examples. The library is
 tested with Arduino 1.0.6 and Teensyduino 1.20.
@@ -151,11 +151,11 @@ The PCB's I designed to connect the radio modules to the Teensy can be found in
 [extras/hardware/](extras/hardware/).
 
 License
-------
+-------
 MIT License, see LICENSE.md.
 
 Copyright (c) 2014 Ivor Wanders
-
+Copyright (c) 2018 Charles Taylor
 
 [teensy31]: http://www.pjrc.com/teensy/
 [radiohead]: http://www.airspayce.com/mikem/arduino/RadioHead/

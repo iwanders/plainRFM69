@@ -89,6 +89,8 @@ receive	KEYWORD2
 poll	KEYWORD2
 available	KEYWORD2
 read	KEYWORD2
+setHighPowerModule  KEYWORD2
+setTxPower	KEYWORD2
 baud4800	KEYWORD2
 baud9600	KEYWORD2
 baud153600	KEYWORD2
