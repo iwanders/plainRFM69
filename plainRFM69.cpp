@@ -106,6 +106,90 @@ void plainRFM69::setAES(bool use_AES){
 }
 
 
+void plainRFM69::setTxPower(int8_t power_level_dBm, bool enable_boost)
+{
+    /*
+       The code below is based on the knowledge gleaned from this article:
+
+         https://andrehessling.de/2015/02/07/figuring-out-the-power-level-settings-of-hoperfs-rfm69-hwhcw-modules/
+
+       Additionally, I studied the following drivers for inspiration and understanding.
+
+         https://github.com/ahessling/RFM69-STM32
+         https://github.com/LowPowerLab/RFM69
+         http://www.airspayce.com/mikem/arduino/RadioHead/classRH__RF69.html
+    */
+
+    // Determine the hardware type.
+    if (use_HP_module)
+    {
+        // ***** High power module is installed. Things are complicated. *****
+
+        /*
+           Possible output power levels for the high-power hardware are -2 to +20 dBm.
+
+             -2 to +13  Using just PA1
+             +2 to +17  Using PA1 and PA2
+
+           +3 dBm on top of the above levels is available by also enabling the
+           RFM69_TEST_PA1 and RFM69_TEST_PA2 registers. This boost mode comes with
+           some caveats.
+
+           First, the +20dBm level is limited to a 1% Duty Cycle. Given the design of
+           the module and the amount of power it takes to reach these levels, this
+           makes me think the radio might have a thermal problem when these
+           capabilities are used.
+
+           Second, the datasheet explicitly states on page 22 that the high power
+           settings must not be used in Receive mode. This requires adding the
+           tx_power_boosted option to enable these when transmitting and disable them
+           when receiving.
+
+           Lastly, the on-module over-current protection must be disabled. This will
+           cause strain on the underlying power system, probably explaining the need
+           for extra capacitors in certain configurations.
+
+           Because of the above, this function is set up to require that the boost
+           mode be explicitly enabled to reach those power levels.
+        */
+
+        // Boost mode control.
+        if (enable_boost)
+        {
+            // Enable boost register control in the transmit/receive functions.
+            this->tx_power_boosted = true;
+
+            // Explicitly configure Over Current Protection as specified on page 22.
+            this->setOCP(0);
+
+            // Set the upper limit on the requested power.
+            if (power_level_dBm > 20) power_level_dBm = 20;
+        } else {
+            // Set the upper limit on the requested power, without boost mode.
+            if (power_level_dBm > 17) power_level_dBm = 17;
+        }
+
+        // The low-end power range is more restricted with high power modules.
+        if (power_level_dBm < -2) power_level_dBm = -2;
+
+        // Up to +13dBm, only the PA1 amplifier is needed.
+        if (power_level_dBm <= 13)
+        {
+            this->setPALevel(RFM69_PA_LEVEL_PA1_ON, power_level_dBm + 18);
+        } else {
+            this->setPALevel(RFM69_PA_LEVEL_PA1_ON + RFM69_PA_LEVEL_PA2_ON, power_level_dBm + 11);
+        }
+
+    } else {
+        // ***** Low power module is installed. Things are simple. *****
+        // Enable PA0 and set the power directly using an offset from the passed value.
+        if (power_level_dBm < -18) power_level_dBm = -18;
+        if (power_level_dBm > 13) power_level_dBm = 13;
+        this->setPALevel(RFM69_PA_LEVEL_PA0_ON, power_level_dBm + 18);
+    }
+}
+
+
 bool plainRFM69::canSend(){
     return (this->state == RFM69_PLAIN_STATE_RECEIVING);
     // if we're receiving, we can send.
@@ -163,6 +247,13 @@ void plainRFM69::receive(){
     this->setAutoMode(RFM69_AUTOMODE_ENTER_RISING_PAYLOADREADY, RFM69_AUTOMODE_EXIT_FALLING_FIFONOTEMPTY, RFM69_AUTOMODE_INTERMEDIATEMODE_STANDBY);
     // one disadvantage of this is that the PayloadReady Interrupt is not asserted.
     // however, the intermediate mode can be detected easily.
+
+    // p22 - Turn off the high power boost registers in receiving mode.
+    if (this->tx_power_boosted)
+    {
+        this->setPa13dBm1(false);
+        this->setPa13dBm2(false);
+    }
 
     // set the mode to receiver.
     this->setMode(RFM69_MODE_SEQUENCER_ON+RFM69_MODE_RECEIVER);
@@ -358,6 +449,13 @@ void plainRFM69::sendPacket(void* buffer, uint8_t len){
     // perhaps RFM69_AUTOMODE_ENTER_RISING_FIFONOTEMPTY is faster?
     
     // set it into automode for transmitting
+
+    // p22 - Turn on the high power boost registers in transmitting mode.
+    if (this->tx_power_boosted)
+    {
+        this->setPa13dBm1(true);
+        this->setPa13dBm2(true);
+    }
 
     // write the fifo.
     this->state = RFM69_PLAIN_STATE_SENDING; // set the state to sending.

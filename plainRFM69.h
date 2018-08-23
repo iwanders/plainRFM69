@@ -60,6 +60,8 @@ class plainRFM69 : public bareRFM69{
         bool use_variable_length;
         bool use_addressing;
         bool use_AES;
+        bool use_HP_module = false;
+        bool tx_power_boosted = false;
 
         // state of the radio module.
         volatile uint8_t state;
@@ -210,7 +212,19 @@ class plainRFM69 : public bareRFM69{
 
             It does provide some sort of whitening filter.
         */
-        
+
+        void setHighPowerModule(){this->use_HP_module = true;};
+        /*
+            Informs the library that a high-power module variant (RFM69HW or RFM69HCW) is present.
+        */
+
+        void setTxPower(int8_t power_level_dBm, bool enable_boost = false);
+        /*
+            Accepts a decibel target output power between -18 and +20.
+
+            The requested power will be adjusted to be within the capability range
+            of the installed module.
+        */
 
         bool canSend();
         /*
