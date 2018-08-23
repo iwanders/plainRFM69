@@ -58,6 +58,8 @@ If the radio has received a packet, it waits in the Intermediate Mode until the
 packet is read from the FIFO. When a packet is transmitted, the radio is in the
 Intermediate Mode until the packet is completely sent. The radio module can
 represent whether it is in the Intermediate State on a digital IO pin (DIO2).
+In a slightly different way the same can be achieved using the DIO0 pin from the
+radio module, see the `PingPongHPdio0` example on how to use that pin.
 
 The microcontroller can attach an interrupt to this pin and call the poll()
 method on every change. This means that if a packet is received, the
@@ -76,7 +78,9 @@ Testing & Performance
 -------------------
 The library was developed and tested on two [Teensy 3.1][teensy31]'s with
 RFM69CW's attached. The pins used are described in the examples. The library is
-tested with Arduino 1.0.6 and Teensyduino 1.20.
+tested with Arduino 1.0.6, 1.8.5. The DIO0 example was developed using
+AdaFruit Feather M0 with the RFM69HCW radio module. Arduino and Moteino are also
+known to work.
 
 All tests were performed with the radio modules located next to each other. The
 measured results are of course dependent on the parameters chosen, the
@@ -137,15 +141,11 @@ implementation to build on. The internal buffering is shown in the BusyMan
 example.
 
 The header files for both bareRFM69 and plainRFM69 provide explanation of the
-methods.
+methods. If using a high power module, be sure to call `setHighPowerModule()` to
+enable the high power functionality to be used.
 
-I've only tested the examples with [Teensy 3][teensy31], so I cannot comment on
-this working with other hardware. Other libraries that might interest you are
-[Radiohead][radiohead] or LowPowerLabs' [RFM69][rfm69] which have seen extensive
-testing, also on hardware other than the Teensy. That being said, an example has
-been added which is known to work on the Arduino UNO and Moteino, see
-issue [#1](https://github.com/iwanders/plainRFM69/issues/1) for further
-information.
+Other libraries that might interest you are [Radiohead][radiohead] or
+LowPowerLabs' [RFM69][rfm69] which have seen extensive testing.
 
 The PCB's I designed to connect the radio modules to the Teensy can be found in
 [extras/hardware/](extras/hardware/).
