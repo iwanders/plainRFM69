@@ -236,7 +236,7 @@ class bareRFM69 {
 
         // data modulation
         void setDataModul(uint8_t processing, bool use_ook, uint8_t modulationshaping){
-            this->writeRegister(RFM69_DATA_MODUL, (processing << 6) + (use_ook << 3));};
+            this->writeRegister(RFM69_DATA_MODUL, (processing << 6) + (use_ook << 3) + (modulationshaping & 0b11));};
         /*
             processing is either:
                 RFM69_DATAMODUL_PROCESSING_PACKET
