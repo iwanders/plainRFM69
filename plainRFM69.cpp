@@ -95,9 +95,10 @@ void plainRFM69::setPacketLength(uint8_t length){
 
 }
 
-void plainRFM69::setFrequency(uint32_t freq){
+void plainRFM69::setFrequency(uint64_t freq){
     // 61 should be 61.03515625 for precision.
-    this->setFrf(freq/61);
+    const uint64_t divider = 61;
+    this->setFrf(freq / divider);
 }
 
 
