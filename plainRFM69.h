@@ -189,7 +189,7 @@ class plainRFM69 : public bareRFM69{
 
         */
 
-        void setFrequency(uint32_t freq);
+        void setFrequency(uint64_t freq);
         /*
             Sets the frequency to approximately Freq.
             Uses 61 as Fstep instead of 61.03515625 which it actually is.
